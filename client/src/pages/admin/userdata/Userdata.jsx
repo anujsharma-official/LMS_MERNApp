@@ -61,7 +61,8 @@ const UserTable = () => {
         </span>
       </div>
 
-      <div className="overflow-x-auto rounded-lg border border-zinc-200 dark:border-zinc-700">
+      {/* Desktop/Table view */}
+      <div className="hidden md:block overflow-x-auto rounded-lg border border-zinc-200 dark:border-zinc-700">
         <Table className="min-w-[750px]">
           <TableHeader>
             <TableRow className="bg-muted">
@@ -114,6 +115,56 @@ const UserTable = () => {
             ))}
           </TableBody>
         </Table>
+      </div>
+
+      {/* Mobile card view */}
+      <div className="md:hidden space-y-4">
+        {data?.users?.map((user, index) => (
+          <div
+            key={user._id}
+            className="p-4 rounded-lg bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 shadow-sm"
+          >
+            <div className="flex justify-between items-center mb-2">
+              <span className="font-semibold text-lg">{user.name}</span>
+              <span className="text-sm text-muted-foreground">#{index + 1}</span>
+            </div>
+
+            <div className="text-sm text-muted-foreground mb-1">
+              <strong>Email: </strong> {user.email}
+            </div>
+
+            <div className="mb-1">
+              <strong>Role: </strong>
+              <span
+                className={`px-2 py-1 rounded-md text-xs font-medium uppercase tracking-wide ${
+                  user.role === "admin"
+                    ? "bg-green-100 text-green-700 dark:bg-green-800 dark:text-green-200"
+                    : "bg-blue-100 text-blue-700 dark:bg-blue-800 dark:text-blue-200"
+                }`}
+              >
+                {user.role}
+              </span>
+            </div>
+
+            <div className="mb-2">
+              <strong>Status: </strong>
+              <span className="text-sm text-muted-foreground">
+                {user.status || "Active"}
+              </span>
+            </div>
+
+            <Button
+              variant="destructive"
+              size="sm"
+              className="w-full gap-2"
+              disabled={isDeleting}
+              onClick={() => handleDelete(user._id)}
+            >
+              <Trash2 className="w-4 h-4" />
+              Delete
+            </Button>
+          </div>
+        ))}
       </div>
     </div>
   );
