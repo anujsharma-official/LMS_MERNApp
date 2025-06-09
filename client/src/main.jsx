@@ -7,10 +7,14 @@ import { appStore } from "./app/store";
 import { Toaster } from "./components/ui/sonner";
 import { useLoadUserQuery } from "./features/api/authApi";
 import LoadingSpinner from "./components/LoadingSpinner";
+import { registerSW } from "virtual:pwa-register"; // ✅ PWA registration
+
+// Optional: register service worker
+registerSW({ immediate: true }); // 🔁 enables auto update of PWA
 
 const Custom = ({ children }) => {
   const { isLoading } = useLoadUserQuery();
-  return <>{isLoading ? <LoadingSpinner/> : <>{children}</>}</>;
+  return <>{isLoading ? <LoadingSpinner /> : <>{children}</>}</>;
 };
 
 createRoot(document.getElementById("root")).render(
