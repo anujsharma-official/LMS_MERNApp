@@ -8,7 +8,12 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: "autoUpdate",
-      includeAssets: ["favicon.ico", "robots.txt", "icons/icon-192x192.png", "icons/icon-512x512.png"],
+      includeAssets: [
+        "favicon.ico",
+        "robots.txt",
+        "icons/icon-192x192.png",
+        "icons/icon-512x512.png"
+      ],
       manifest: {
         name: "E-Learning LMS",
         short_name: "LMS",
@@ -16,24 +21,25 @@ export default defineConfig({
         display: "standalone",
         background_color: "#ffffff",
         theme_color: "#4f46e5",
+        orientation: "portrait",
         icons: [
           {
-            src: "/icons/icon-192x192.png",
+            src: "icons/icon-192x192.png",
             sizes: "192x192",
-            type: "image/png",
+            type: "image/png"
           },
           {
-            src: "/icons/icon-512x512.png",
+            src: "icons/icon-512x512.png",
             sizes: "512x512",
-            type: "image/png",
-          },
-        ],
-      },
-    }),
+            type: "image/png"
+          }
+        ]
+      }
+    })
   ],
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "./src"),
-    },
-  },
+      "@": path.resolve(__dirname, "./src")
+    }
+  }
 });
